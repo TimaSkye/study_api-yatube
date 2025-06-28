@@ -4,13 +4,17 @@ from posts.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
+    author = serializers.PrimaryKeyRelatedField(read_only=True)
+    group = serializers.PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         model = Post
-        fields = (
-            'id',
-            'text',
-            'author',
-            'image',
-            'group',
-            'pub_date',
-        )
+        fields = ('id', 'text', 'pub_date', 'author', 'image', 'group')
+
+
+class GroupSerializer:
+    pass
+
+
+class CommentSerializer:
+    pass

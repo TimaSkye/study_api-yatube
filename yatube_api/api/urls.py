@@ -3,12 +3,14 @@ from rest_framework.authtoken import views
 from rest_framework.routers import SimpleRouter
 from rest_framework_nested.routers import NestedSimpleRouter
 
-from api.views import PostViewSet, GroupsViewSet, CommentViewSet
+from api.views import PostViewSet, GroupViewSet, CommentViewSet
 
 router = SimpleRouter()
-router.register('posts', PostViewSet)
-router.register('groups', GroupsViewSet)
+router.register('posts', PostViewSet, basename='posts')
+router.register('groups', GroupViewSet, basename='groups')
+router.register('groups', GroupViewSet)
 
+# Вложенные роутеры комментариев к постам.
 posts_router = NestedSimpleRouter(router, r'posts', lookup='post')
 posts_router.register(r'comments', CommentViewSet, basename='post-comments')
 urlpatterns = [

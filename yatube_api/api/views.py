@@ -1,17 +1,23 @@
-from django.shortcuts import render
-from rest_framework import viewsets
 
-from api import serializers
-from posts.models import Post
+from rest_framework import viewsets, permissions
+
+from api.serializers import PostSerializer, GroupSerializer, CommentSerializer
+from posts.models import Post, Group, Comment
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
-    serializer_class = serializers.PostSerializer
+    serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
 
-class GroupsViewSet:
-    pass
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
 
 
-class CommentViewSet:
-    pass
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
