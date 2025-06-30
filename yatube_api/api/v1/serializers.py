@@ -16,7 +16,10 @@ class PostSerializer(serializers.ModelSerializer):
     Поле author доступно только для чтения.
     Поле group сериализуется по slug.
     """
-    author = serializers.StringRelatedField(read_only=True)
+    author = serializers.SlugRelatedField(
+        slug_field='username',
+        read_only=True
+    )
     group = serializers.SlugRelatedField(
         slug_field='slug',
         queryset=Group.objects.all(),
@@ -27,7 +30,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
-        read_only_fields = ('author',)
+
 
 
 class CommentSerializer(serializers.ModelSerializer):
