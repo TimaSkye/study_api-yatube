@@ -7,7 +7,8 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
     Остальные аутентифицированные пользователи имеют доступ только на чтение.
     """
     message = (
-        "Изменение и удаление чужого контента запрещено."
+        "Изменение и удаление чужого "
+        "контента запрещено."
     )
 
     def has_permission(self, request, view):
