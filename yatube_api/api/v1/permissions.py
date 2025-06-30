@@ -13,7 +13,9 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
         return request.user and request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
-        """Разрешаем безопасные методы (GET, HEAD, OPTIONS) всем аутентифицированным"""
+        """
+        Разрешаем безопасные методы (GET, HEAD, OPTIONS) всем аутентифицированным.
+        """
         if request.method in permissions.SAFE_METHODS:
             return True
 
