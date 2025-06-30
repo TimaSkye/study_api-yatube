@@ -1,6 +1,6 @@
 from rest_framework import viewsets, permissions
 from django.shortcuts import get_object_or_404
-from posts.models import Post, Group, Comment
+from posts.models import Post, Group
 from .serializers import PostSerializer, GroupSerializer, CommentSerializer
 from .permissions import IsAuthorOrReadOnly
 
@@ -45,7 +45,8 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def get_post(self):
         """
-        Получить объект поста по post_pk из URL или вернуть 404, если не найден.
+        Получить объект поста по post_pk из URL
+        или вернуть 404, если не найден.
         """
         post_id = self.kwargs.get('post_pk')
         return get_object_or_404(Post, pk=post_id)

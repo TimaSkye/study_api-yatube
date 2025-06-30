@@ -32,7 +32,6 @@ class PostSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
 class CommentSerializer(serializers.ModelSerializer):
     """
     Сериализатор для модели Comment.
